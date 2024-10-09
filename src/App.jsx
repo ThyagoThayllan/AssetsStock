@@ -8,6 +8,18 @@ import styles from "./styles.module.css";
 export const App = () => {
   const [action, setAction] = useState("");
 
+  const [model, setModel] = useState("");
+  const [manufacturer, setManufacturer] = useState("");
+  const [category, setCategory] = useState("");
+  const [note, setNote] = useState("");
+
+  const productData = {
+    model,
+    manufacturer,
+    category,
+    note,
+  };
+
   const categorys = [
     "Computadores e Dispositivos Pessoais",
     "Servidores",
@@ -59,7 +71,9 @@ export const App = () => {
         <div className={styles.form}>
           {action === "" && <h1>Bem vindo!</h1>}
           {action === "products" && <Products />}
-          {action === "register" && <NewProduct categorys={categorys} />}
+          {action === "register" && (
+            <NewProduct categorys={categorys} product={productData} />
+          )}
           {action === "search" && <Search />}
         </div>
       </div>

@@ -8,6 +8,24 @@ import styles from "./styles.module.css";
 export const App = () => {
   const [action, setAction] = useState("");
 
+  const categorys = [
+    "Computadores e Dispositivos Pessoais",
+    "Servidores",
+    "Dispositivos de Rede",
+    "Periféricos",
+    "Equipamentos de Armazenamento",
+    "Dispositivos de Segurança",
+    "Equipamentos de Virtualização",
+    "Acessórios",
+    "Dispositivos Móveis",
+    "Impressoras e Scanners",
+    "Monitores e Telas",
+    "Componentes de Hardware",
+    "Fontes de Energia e UPS",
+    "Licenças de Software",
+    "Equipamentos de Videoconferência",
+  ];
+
   const changeAction = (value) => {
     setAction(value);
   };
@@ -41,7 +59,7 @@ export const App = () => {
         <div className={styles.form}>
           {action === "" && <h1>Bem vindo!</h1>}
           {action === "products" && <Products />}
-          {action === "register" && <NewProduct />}
+          {action === "register" && <NewProduct categorys={categorys} />}
           {action === "search" && <Search />}
         </div>
       </div>

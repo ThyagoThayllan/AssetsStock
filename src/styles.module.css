@@ -1,34 +1,47 @@
 .container {
-    display: flex;
+  display: flex;
 }
 
 .mainContainer {
-    display: flex;
-    flex-flow: column;
-    padding: 3rem;
+  display: flex;
+  flex-flow: column;
+  padding: 3rem;
+  flex: 1;
+}
+
+.form {
+  display: flex;
+  flex-flow: column;
 }
 
 .actions {
-    display: flex;
-    border: 2px solid #199;
-    border-radius: 5px;
+  display: flex;
+  border: 2px solid #199;
+  border-radius: 5px;
+  width: fit-content;
 }
 
 .actions button {
-    background: transparent;
-    border: 0;
-    padding: 0.5rem 1rem;
-    border-right: 2px solid #199;
-    color: #199;
-    font-weight: bold;
-    transition: all 0.5s;
-    cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0.5rem 1rem;
+  border-right: 2px solid #199;
+  color: #199;
+  font-weight: bold;
+  transition: all 0.5s;
+  cursor: pointer;
 }
 .actions button:hover {
-    background-color: #199;
-    color: #fff;
+  background-color: #199;
+  color: #fff;
 }
 
-.actions :last-child {
-    border: 0;
+.actions button:last-child {
+  border-right: 0;
+}
+
+.form {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #199;
 }

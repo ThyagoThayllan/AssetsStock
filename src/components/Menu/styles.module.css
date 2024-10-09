@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  padding: 1.5rem;
+  flex-flow: column;
+  gap: 2rem;
+  min-height: 100vh;
+  background-color: #199;
+  width: 250px;
+  box-shadow: 0 0 10px 5px #000;
+  color: #fff;
+}
+
+.container h1 {
+    font-size: 1.75rem;
+}
+
+.container ul {
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
+}
+
+.container nav ul li {
+    list-style: none;
+}
+.container nav ul li a {
+    text-decoration: none;
+    font-size: 1.25rem;
+    color: #000;
+}

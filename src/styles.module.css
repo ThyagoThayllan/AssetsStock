@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+}
+
+.mainContainer {
+    display: flex;
+    flex-flow: column;
+    padding: 3rem;
+}
+
+.actions {
+    display: flex;
+    border: 2px solid #199;
+    border-radius: 5px;
+}
+
+.actions button {
+    background: transparent;
+    border: 0;
+    padding: 0.5rem 1rem;
+    border-right: 2px solid #199;
+    color: #199;
+    font-weight: bold;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.actions button:hover {
+    background-color: #199;
+    color: #fff;
+}
+
+.actions :last-child {
+    border: 0;
+}

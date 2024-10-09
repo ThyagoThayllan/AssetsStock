@@ -25,6 +25,10 @@
   border-radius: 5px;
 }
 
+.divForm select {
+    padding: 0.5rem;
+}
+
 .btn {
   margin-top: 1rem;
   padding: 1rem;

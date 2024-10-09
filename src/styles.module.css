@@ -28,7 +28,7 @@
   border-right: 2px solid #199;
   color: #199;
   font-weight: bold;
-  transition: all 0.5s;
+  transition: all 0.2s;
   cursor: pointer;
 }
 .actions button:hover {

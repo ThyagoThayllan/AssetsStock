@@ -1,6 +1,9 @@
+import { useState } from "react";
 import styles from "./styles.module.css";
 
 export const NewProduct = ({ categorys }) => {
+  const [registered, setRegistered] = useState(false);
+
   return (
     <div>
       <h1>Novo Produto</h1>
@@ -39,8 +42,26 @@ export const NewProduct = ({ categorys }) => {
           ></textarea>
         </div>
 
-        <button className={styles.btn}>Cadastrar</button>
+        <div>
+          <button
+            type="button"
+            onClick={() => setRegistered(!registered)}
+            className={styles.btn}
+          >
+            Cadastrar
+          </button>
+          {registered && (
+            <span className={registered && styles.registered}>
+              PRODUTO cadastrado com sucesso!
+            </span>
+          )}
+        </div>
       </form>
+
+      {model && <p>{model}</p>}
+      {manufacturer && <p>{manufacturer}</p>}
+      {category && <p>{category}</p>}
+      {note && <p>{note}</p>}
     </div>
   );
 };

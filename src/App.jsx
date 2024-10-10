@@ -19,6 +19,12 @@ export const App = () => {
     category,
     note,
   };
+  const productFunctions = {
+    setModel,
+    setManufacturer,
+    setCategory,
+    setNote,
+  };
 
   const categorys = [
     "Computadores e Dispositivos Pessoais",
@@ -72,9 +78,13 @@ export const App = () => {
           {action === "" && <h1>Bem vindo!</h1>}
           {action === "products" && <Products />}
           {action === "register" && (
-            <NewProduct categorys={categorys} product={productData} />
+            <NewProduct
+              categorys={categorys}
+              product={productData}
+              productFunctions={productFunctions}
+            />
           )}
-          {action === "search" && <Search />}
+          {action === "search" && <Search categorys={categorys} />}
         </div>
       </div>
     </div>

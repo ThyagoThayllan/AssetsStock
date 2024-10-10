@@ -67,11 +67,6 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
           )}
         </div>
       </form>
-
-      {/* {model && <p>{model}</p>}
-      {manufacturer && <p>{manufacturer}</p>}
-      {category && <p>{category}</p>}
-      {note && <p>{note}</p>} */}
     </div>
   );
 };

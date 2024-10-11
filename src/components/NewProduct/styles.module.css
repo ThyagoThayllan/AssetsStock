@@ -51,3 +51,17 @@
   border-radius: 5px;
   color: #fff;
 }
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+small {
+  font-style: italic;
+}
+
+.alert {
+  color: #f00;
+  margin-top: 0.25rem;
+}

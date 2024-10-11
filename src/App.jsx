@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Menu } from "./components/Menu";
 import { Products } from "./components/Products";

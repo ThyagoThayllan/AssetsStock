@@ -6,7 +6,7 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
 
   return (
     <div>
-      <h1>Novo Produto</h1>
+      <h1>Novo produto</h1>
 
       <form>
         <div className={styles.divForm}>

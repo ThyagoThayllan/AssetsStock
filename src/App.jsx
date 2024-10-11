@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Menu } from "./components/Menu";
 import { Products } from "./components/Products";
 import { NewProduct } from "./components/NewProduct";
@@ -12,6 +13,8 @@ export const App = () => {
   const [manufacturer, setManufacturer] = useState("");
   const [category, setCategory] = useState("");
   const [note, setNote] = useState("");
+
+  const [products, setProducts] = useState([]);
 
   const productData = {
     model,
@@ -48,6 +51,24 @@ export const App = () => {
     setAction(value);
   };
 
+  //  Requisições HTTP - AXIOS
+  axios.defaults.baseURL = "http://localhost:80/back/";
+
+  const getProducts = async () => {
+    try {
+      const res = await axios.get("?action=search");
+      const data = res.data;
+
+      setProducts(data);
+    } catch (error) {
+      console.error(`Erro: ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <div className={styles.container}>
       <Menu />
@@ -76,7 +97,7 @@ export const App = () => {
 
         <div className={styles.form}>
           {action === "" && <h1>Bem vindo!</h1>}
-          {action === "products" && <Products />}
+          {action === "products" && <Products products={products} />}
           {action === "register" && (
             <NewProduct
               categorys={categorys}

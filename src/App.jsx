@@ -51,7 +51,7 @@ export const App = () => {
     setAction(value);
   };
 
-  //  Requisições HTTP - AXIOS
+  //  Definição da URL base
   axios.defaults.baseURL = "http://localhost:80/back/";
 
   const getProducts = async () => {

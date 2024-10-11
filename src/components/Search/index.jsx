@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 
-export const Search = ({ categorys }) => {
+export const Search = ({ categorys, deleteAsset }) => {
   const [model, setModel] = useState("");
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("");
@@ -89,15 +89,18 @@ export const Search = ({ categorys }) => {
             <table key={asset.id}>
               <tbody>
                 <tr>
-                  <td>{asset.manufacturer}</td>
                   <td>{asset.model}</td>
+                  <td>{asset.manufacturer}</td>
                   <td>{asset.category}</td>
                   <td>{asset.note}</td>
                   <td>
                     <button className={styles.edit}>
                       <i className="bi bi-pencil-square"></i>
                     </button>
-                    <button className={styles.delete}>
+                    <button
+                      className={styles.delete}
+                      onClick={() => deleteAsset(asset.id, assets, setAssets)}
+                    >
                       <i className="bi bi-trash"></i>
                     </button>
                   </td>

@@ -1,11 +1,22 @@
 import { useState } from "react";
+import axios from "axios";
 import styles from "./styles.module.css";
 
 export const Search = ({ categorys }) => {
   const [model, setModel] = useState("");
   const [category, setCategory] = useState("");
-
   const [filter, setFilter] = useState("");
+
+  const [assets, setAssets] = useState([]);
+
+  const getProduct = async (e, filter, asset) => {
+    e.preventDefault();
+
+    const res = await axios.get(`?action=search&${filter}=${asset}`);
+    const data = res.data;
+
+    setAssets(data);
+  };
 
   return (
     <div className={styles.container}>
@@ -28,7 +39,12 @@ export const Search = ({ categorys }) => {
           </div>
         </div>
 
-        <form className={styles.searchForm}>
+        <form
+          className={styles.searchForm}
+          onSubmit={(e) =>
+            getProduct(e, filter, filter === "model" ? model : category)
+          }
+        >
           {filter === "model" && (
             <div>
               <label htmlFor="model">Modelo:</label>
@@ -37,6 +53,10 @@ export const Search = ({ categorys }) => {
                 placeholder="Busque pelo modelo..."
                 onChange={(e) => setModel(e.target.value)}
               />
+
+              <button type="submit" className={styles.searchBtn}>
+                Buscar
+              </button>
             </div>
           )}
 
@@ -49,15 +69,48 @@ export const Search = ({ categorys }) => {
               >
                 <option value="">Selecionar</option>
                 {categorys.map((category) => (
-                  <option value={category}>{category}</option>
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
                 ))}
               </select>
+
+              <button type="submit" className={styles.searchBtn}>
+                Buscar
+              </button>
             </div>
           )}
-
-          {filter !== "" && <button>Buscar</button>}
         </form>
       </div>
+
+      {assets.length > 0 ? (
+        <div className={styles.assetsContainer}>
+          {assets.map((asset) => (
+            <table key={asset.id}>
+              <tbody>
+                <tr>
+                  <td>{asset.manufacturer}</td>
+                  <td>{asset.model}</td>
+                  <td>{asset.category}</td>
+                  <td>{asset.note}</td>
+                  <td>
+                    <button className={styles.edit}>
+                      <i className="bi bi-pencil-square"></i>
+                    </button>
+                    <button className={styles.delete}>
+                      <i className="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <h3>Nenhum produto pesquisado</h3>
+        </div>
+      )}
     </div>
   );
 };

@@ -34,11 +34,16 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
           }
         );
 
-        setRegistered(!registered);
+        setRegistered(true);
+
         productFunctions.setModel("");
         productFunctions.setManufacturer("");
         productFunctions.setCategory("");
         productFunctions.setNote("");
+
+        setTimeout(() => {
+          setRegistered(false);
+        }, 2000);
       } catch (error) {
         console.error(`Erro: ${error}`);
       }
@@ -107,11 +112,11 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
           <button type="submit" className={styles.btn}>
             Cadastrar
           </button>
-          {registered && (
-            <span className={registered && styles.registered}>
-              PRODUTO cadastrado com sucesso!
-            </span>
-          )}
+          <span
+            className={registered ? styles.registered : styles.notRegistered}
+          >
+            {product.name} Ativo cadastrado com sucesso!
+          </span>
         </div>
       </form>
     </div>

@@ -43,6 +43,11 @@
   opacity: 1;
 }
 
+.notRegistered {
+  opacity: 0;
+  transition: all 0.2s;
+}
+
 .registered {
   margin-left: 1rem;
   background-color: #080;
@@ -50,6 +55,8 @@
   padding: 0.5rem;
   border-radius: 5px;
   color: #fff;
+  transition: all 0.2s;
+  transform: scale(1);
 }
 
 .btn:disabled {

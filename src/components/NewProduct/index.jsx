@@ -10,9 +10,9 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
     e.preventDefault();
 
     if (
-      product.model === "" ||
-      product.manufacturer === "" ||
-      product.category === ""
+      product.model.trim() === "" ||
+      product.manufacturer.trim() === "" ||
+      product.category.trim() === ""
     ) {
       setEmpty(true);
     } else {
@@ -22,10 +22,10 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
         await axios.post(
           "?action=register",
           {
-            model: product.model,
-            manufacturer: product.manufacturer,
-            category: product.category,
-            note: product.note,
+            model: product.model.trim(),
+            manufacturer: product.manufacturer.trim(),
+            category: product.category.trim(),
+            note: product.note.trim(),
           },
           {
             headers: {
@@ -50,6 +50,17 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
     }
   };
 
+  const checkFormField = () => {
+    if (
+      product.model === "" ||
+      product.manufacturer === "" ||
+      product.category === ""
+    ) {
+    }
+  };
+
+  const [name, setName] = useState("");
+
   return (
     <div>
       <h1>Novo produto</h1>
@@ -61,9 +72,13 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
             type="text"
             name="model"
             placeholder="Digite o modelo do produto..."
-            onChange={(e) => productFunctions.setModel(e.target.value)}
+            onChange={(e) => {
+              productFunctions.setModel(e.target.value);
+              setName(e.target.value)
+            }}
             value={product.model}
           />
+          <p style={{backgroundColor: '#080'}}>{name}</p>
         </div>
         <div className={styles.divForm}>
           <label htmlFor="manufacturer">Fabricante:</label>

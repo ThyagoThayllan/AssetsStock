@@ -1,8 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
+import { EditModal } from "../EditModal";
 
-export const Search = ({ categorys, deleteAsset }) => {
+export const Search = ({ categorys, deleteAsset, modal }) => {
   const [model, setModel] = useState("");
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("");
@@ -20,6 +21,8 @@ export const Search = ({ categorys, deleteAsset }) => {
 
   return (
     <div className={styles.container}>
+      {modal.modalOpened && <EditModal modal={modal} />}
+
       <h1>Buscar produto</h1>
 
       <div className={styles.search}>
@@ -94,7 +97,12 @@ export const Search = ({ categorys, deleteAsset }) => {
                   <td>{asset.category}</td>
                   <td>{asset.note}</td>
                   <td>
-                    <button className={styles.edit}>
+                    <button
+                      className={styles.edit}
+                      onClick={() => {
+                        modal.setModalOpened(!modal.modalOpened);
+                      }}
+                    >
                       <i className="bi bi-pencil-square"></i>
                     </button>
                     <button

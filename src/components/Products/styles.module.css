@@ -2,6 +2,10 @@
   margin-bottom: 1rem;
 }
 
+table {
+  width: 100%;
+}
+
 table,
 th,
 td {
@@ -48,4 +52,37 @@ td::-webkit-scrollbar-track {
 td::-webkit-scrollbar-thumb {
   background: #199;
   border-radius: 10px;
+}
+
+.edit {
+  border: 2px solid #199;
+  color: #199;
+  margin-bottom: 0.25rem;
+  transition: all 0.2s;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  margin-right: 0.25rem;
+}
+.edit:hover {
+  background-color: #199;
+  color: #fff;
+}
+
+.delete {
+  color: #f00;
+  border: 2px solid #f00;
+  transition: all 0.2s;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+}
+.delete:hover {
+  background-color: #f00;
+  color: #fff;
 }

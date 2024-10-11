@@ -45,7 +45,7 @@ export const App = () => {
     "Fontes de Energia e UPS",
     "Licenças de Software",
     "Equipamentos de Videoconferência",
-  ];
+  ].sort();
 
   const changeAction = (value) => {
     setAction(value);

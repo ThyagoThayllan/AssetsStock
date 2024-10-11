@@ -20,17 +20,17 @@ export const Products = ({ products }) => {
 
         <tbody>
           {products.map((product) => (
-            <tr>
+            <tr key={product.id}>
               <td>{product.model}</td>
               <td>{product.manufacturer}</td>
               <td>{product.category}</td>
               <td>{product.note}</td>
               <td>
                 <button className={styles.edit} title="Editar">
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                 </button>
                 <button className={styles.delete} title="Deletar">
-                  <i class="bi bi-trash"></i>
+                  <i className="bi bi-trash"></i>
                 </button>
               </td>
             </tr>

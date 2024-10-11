@@ -14,6 +14,7 @@ export const Products = ({ products }) => {
             <th>Marca</th>
             <th>Notebook</th>
             <th>Mensagem</th>
+            <th>Ação</th>
           </tr>
         </thead>
 
@@ -24,6 +25,14 @@ export const Products = ({ products }) => {
               <td>{product.manufacturer}</td>
               <td>{product.category}</td>
               <td>{product.note}</td>
+              <td>
+                <button className={styles.edit} title="Editar">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button className={styles.delete} title="Deletar">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

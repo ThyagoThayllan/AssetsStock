@@ -1,8 +1,11 @@
+import { EditModal } from "../EditModal";
 import styles from "./styles.module.css";
 
-export const Products = ({ products, deleteAsset, setProducts }) => {
+export const Products = ({ products, deleteAsset, setProducts, modal }) => {
   return (
     <div className={styles.container}>
+      {modal.modalOpened && <EditModal modal={modal} />}
+
       <h1>Tabela de Produtos</h1>
 
       <table>
@@ -27,7 +30,11 @@ export const Products = ({ products, deleteAsset, setProducts }) => {
                 <td>{product.category}</td>
                 <td>{product.note}</td>
                 <td>
-                  <button className={styles.edit} title="Editar">
+                  <button
+                    className={styles.edit}
+                    title="Editar"
+                    onClick={() => modal.setModalOpened(!modal.modalOpened)}
+                  >
                     <i className="bi bi-pencil-square"></i>
                   </button>
                   <button
@@ -44,7 +51,7 @@ export const Products = ({ products, deleteAsset, setProducts }) => {
             ))
           ) : (
             <tr>
-              <td colSpan={5}>Nenhum produto cadastrado</td>
+              <td colSpan={5}>Nenhum item cadastrado</td>
             </tr>
           )}
         </tbody>

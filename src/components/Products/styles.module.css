@@ -1,0 +1,51 @@
+.container h1 {
+  margin-bottom: 1rem;
+}
+
+table,
+th,
+td {
+  border: 2px solid #000;
+  border-collapse: collapse;
+  padding: 0.5rem;
+}
+
+caption {
+  background-color: #199;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem;
+  border: 2px solid #000;
+}
+
+th {
+  background-color: #000;
+  color: #fff;
+  width: 200px;
+}
+
+td {
+  max-width: 200px;
+  height: 70px;
+  text-align: center;
+  text-wrap: nowrap;
+  overflow-x: auto;
+  background-color: #f2f8f8;
+}
+
+tr td:nth-child(4) {
+  max-width: 300px;
+  height: 70px;
+  text-align: start;
+}
+
+td::-webkit-scrollbar {
+  height: 6px;
+}
+td::-webkit-scrollbar-track {
+  background: #d3d3d3;
+}
+td::-webkit-scrollbar-thumb {
+  background: #199;
+  border-radius: 10px;
+}

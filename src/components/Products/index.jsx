@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-export const Products = ({ products }) => {
+export const Products = ({ products, deleteAsset, setProducts }) => {
   return (
     <div className={styles.container}>
       <h1>Tabela de Produtos</h1>
@@ -30,7 +30,13 @@ export const Products = ({ products }) => {
                   <button className={styles.edit} title="Editar">
                     <i className="bi bi-pencil-square"></i>
                   </button>
-                  <button className={styles.delete} title="Deletar">
+                  <button
+                    className={styles.delete}
+                    title="Deletar"
+                    onClick={() => {
+                      deleteAsset(product.id, products, setProducts);
+                    }}
+                  >
                     <i className="bi bi-trash"></i>
                   </button>
                 </td>

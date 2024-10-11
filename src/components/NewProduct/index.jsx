@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 
 export const NewProduct = ({ categorys, product, productFunctions }) => {
   const [registered, setRegistered] = useState(false);
   const [empty, setEmpty] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
 
   const registerAsset = async (e) => {
     e.preventDefault();
@@ -52,14 +53,19 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
 
   const checkFormField = () => {
     if (
-      product.model === "" ||
-      product.manufacturer === "" ||
-      product.category === ""
+      product.model.trim() === "" ||
+      product.manufacturer.trim() === "" ||
+      product.category.trim() === ""
     ) {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
     }
   };
 
-  const [name, setName] = useState("");
+  useEffect(() => {
+    checkFormField();
+  }, [product]);
 
   return (
     <div>
@@ -72,13 +78,9 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
             type="text"
             name="model"
             placeholder="Digite o modelo do produto..."
-            onChange={(e) => {
-              productFunctions.setModel(e.target.value);
-              setName(e.target.value)
-            }}
+            onChange={(e) => productFunctions.setModel(e.target.value)}
             value={product.model}
           />
-          <p style={{backgroundColor: '#080'}}>{name}</p>
         </div>
         <div className={styles.divForm}>
           <label htmlFor="manufacturer">Fabricante:</label>
@@ -124,7 +126,7 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
             </p>
           )}
 
-          <button type="submit" className={styles.btn}>
+          <button type="submit" className={styles.btn} disabled={isEmpty}>
             Cadastrar
           </button>
           <span

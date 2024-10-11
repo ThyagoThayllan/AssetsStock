@@ -19,22 +19,28 @@ export const Products = ({ products }) => {
         </thead>
 
         <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.model}</td>
-              <td>{product.manufacturer}</td>
-              <td>{product.category}</td>
-              <td>{product.note}</td>
-              <td>
-                <button className={styles.edit} title="Editar">
-                  <i className="bi bi-pencil-square"></i>
-                </button>
-                <button className={styles.delete} title="Deletar">
-                  <i className="bi bi-trash"></i>
-                </button>
-              </td>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.model}</td>
+                <td>{product.manufacturer}</td>
+                <td>{product.category}</td>
+                <td>{product.note}</td>
+                <td>
+                  <button className={styles.edit} title="Editar">
+                    <i className="bi bi-pencil-square"></i>
+                  </button>
+                  <button className={styles.delete} title="Deletar">
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={5}>Nenhum produto cadastrado</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

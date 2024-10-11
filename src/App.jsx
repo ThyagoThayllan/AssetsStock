@@ -7,6 +7,12 @@ import { Search } from "./components/Search";
 import styles from "./styles.module.css";
 
 export const App = () => {
+  const [modalOpened, setModalOpened] = useState(false);
+  const modal = {
+    modalOpened,
+    setModalOpened,
+  };
+
   const [action, setAction] = useState("");
 
   const [model, setModel] = useState("");
@@ -82,6 +88,8 @@ export const App = () => {
       .catch((error) => console.error(error));
   };
 
+  const editAsset = () => {};
+
   return (
     <div className={styles.container}>
       <Menu />
@@ -119,6 +127,7 @@ export const App = () => {
               deleteAsset={deleteAsset}
               getProducts={getProducts}
               setProducts={setProducts}
+              modal={modal}
             />
           )}
           {action === "register" && (
@@ -128,7 +137,9 @@ export const App = () => {
               productFunctions={productFunctions}
             />
           )}
-          {action === "search" && <Search categorys={categorys} deleteAsset={deleteAsset} />}
+          {action === "search" && (
+            <Search categorys={categorys} deleteAsset={deleteAsset} modal={modal} />
+          )}
         </div>
       </div>
     </div>

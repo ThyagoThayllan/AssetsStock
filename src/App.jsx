@@ -65,6 +65,13 @@ export const App = () => {
     }
   };
 
+  const deleteAsset = async () => {
+    axios
+      .delete("?action=delete/:id")
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className={styles.container}>
       <Menu />

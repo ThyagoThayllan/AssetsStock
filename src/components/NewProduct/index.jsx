@@ -20,27 +20,27 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
       try {
         setEmpty(false);
 
-        await axios.post(
-          "?action=register",
-          {
-            model: product.model.trim(),
-            manufacturer: product.manufacturer.trim(),
-            category: product.category.trim(),
-            note: product.note.trim(),
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
+        await axios
+          .post(
+            "?action=register",
+            {
+              model: product.model.trim(),
+              manufacturer: product.manufacturer.trim(),
+              category: product.category.trim(),
+              note: product.note.trim(),
             },
-          }
-        );
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((res) => console.log(res))
+          .catch((error) => console.error(error));
 
         setRegistered(true);
 
-        productFunctions.setModel("");
-        productFunctions.setManufacturer("");
-        productFunctions.setCategory("");
-        productFunctions.setNote("");
+        clearFormFields();
 
         setTimeout(() => {
           setRegistered(false);
@@ -61,6 +61,13 @@ export const NewProduct = ({ categorys, product, productFunctions }) => {
     } else {
       setIsEmpty(false);
     }
+  };
+
+  const clearFormFields = () => {
+    productFunctions.setModel("");
+    productFunctions.setManufacturer("");
+    productFunctions.setCategory("");
+    productFunctions.setNote("");
   };
 
   useEffect(() => {

@@ -65,10 +65,20 @@ export const App = () => {
     }
   };
 
-  const deleteAsset = async () => {
-    axios
-      .delete("?action=delete/:id")
-      .then((res) => console.log(res))
+  const deleteAsset = async (id, assets, setState) => {
+    await axios
+      .delete(`?action=delete/:id`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: { id },
+      })
+      .then((res) => {
+        console.log(res);
+
+        const filteredAssets = assets.filter((assets) => assets.id !== id);
+        setState(filteredAssets);
+      })
       .catch((error) => console.error(error));
   };
 
@@ -103,7 +113,14 @@ export const App = () => {
 
         <div className={styles.form}>
           {action === "" && <h1>Bem vindo!</h1>}
-          {action === "products" && <Products products={products} />}
+          {action === "products" && (
+            <Products
+              products={products}
+              deleteAsset={deleteAsset}
+              getProducts={getProducts}
+              setProducts={setProducts}
+            />
+          )}
           {action === "register" && (
             <NewProduct
               categorys={categorys}
@@ -111,7 +128,7 @@ export const App = () => {
               productFunctions={productFunctions}
             />
           )}
-          {action === "search" && <Search categorys={categorys} />}
+          {action === "search" && <Search categorys={categorys} deleteAsset={deleteAsset} />}
         </div>
       </div>
     </div>

@@ -1,8 +1,10 @@
+import styles from "./styles.module.css";
+
 export const Products = ({ products }) => {
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Tabela de Produtos</h1>
-      
+
       <table>
         <caption>Tabela de produtos</caption>
 
@@ -16,14 +18,14 @@ export const Products = ({ products }) => {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Nitro 5 7º</td>
-            <td>Acer</td>
-            <td>Notebook</td>
-            <td>
-              Funcionário utilizando: Thyago Thayllan. Setor: Desenvolvimento
-            </td>
-          </tr>
+          {products.map((product) => (
+            <tr>
+              <td>{product.model}</td>
+              <td>{product.manufacturer}</td>
+              <td>{product.category}</td>
+              <td>{product.note}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

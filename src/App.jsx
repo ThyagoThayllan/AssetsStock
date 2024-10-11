@@ -65,10 +65,6 @@ export const App = () => {
     }
   };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
-
   return (
     <div className={styles.container}>
       <Menu />
@@ -77,7 +73,10 @@ export const App = () => {
         <div className={styles.actions}>
           <button
             value={"products"}
-            onClick={(e) => changeAction(e.target.value)}
+            onClick={(e) => {
+              changeAction(e.target.value);
+              getProducts();
+            }}
           >
             Tabela de produtos
           </button>

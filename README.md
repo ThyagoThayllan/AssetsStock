@@ -54,3 +54,17 @@ C:\xampp\htdocs\back
 ```
 
 **Nota:** É necessário que mova a pasta **_back_** para a pasta **_htdocs_** do **XAMPP**, pois é assim que irá rodar a API em PHP. Caso tenha outro servidor local para rodar PHP, você pode estar utilizando.
+
+# Instruções
+
+![](./imgs/img.png)
+![](./imgs/empty-table.png)
+![](./imgs/fields.png)
+![](./imgs/registered.png)
+![](./imgs/search-model.png)
+![](./imgs/model-searched.png)
+![](./imgs/category-search.png)
+![](./imgs/category-searched.png)
+![](./imgs/open-edit.png)
+![](./imgs/edit-modal.png)
+![](./imgs/delete.png)

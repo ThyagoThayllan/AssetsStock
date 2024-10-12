@@ -8,18 +8,18 @@ Software intuitivo, fácil de usar e prático.
 
 ## Front-end
 
-**- ReactJS**
+- ReactJS.
 
 ## Back-end
 
-**- API - PHP.**
-**- Banco de Dados - SQLite3.**
+- API - PHP.
+- Banco de Dados - SQLite3.
 
 ## Bibliotecas
 
-**- AXIOS - Requisições HTTP.**
+- AXIOS - Requisições HTTP.
 
 # Requisitos
 
-**- Node.js - Para instalação dos pacotes.**
-**- XAMPP (ou algum outro servidor local) - Para rodar a API que é em PHP.**
+- Node.js - Para instalação dos pacotes.
+- XAMPP (ou algum outro servidor local) - Para rodar a API que é em PHP.

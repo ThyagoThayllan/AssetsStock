@@ -1,12 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { Menu } from "./components/Menu";
-import { Products } from "./components/Products";
-import { NewProduct } from "./components/NewProduct";
+import { Assets } from "./components/Assets";
+import { NewAsset } from "./components/NewAsset";
 import { Search } from "./components/Search";
 import styles from "./styles.module.css";
 
 export const App = () => {
+  const [selectedAsset, setSelectedAsset] = useState(null);
+
   const [modalOpened, setModalOpened] = useState(false);
   const modal = {
     modalOpened,
@@ -20,15 +22,15 @@ export const App = () => {
   const [category, setCategory] = useState("");
   const [note, setNote] = useState("");
 
-  const [products, setProducts] = useState([]);
+  const [assets, setAssets] = useState([]);
 
-  const productData = {
+  const assetData = {
     model,
     manufacturer,
     category,
     note,
   };
-  const productFunctions = {
+  const assetFunctions = {
     setModel,
     setManufacturer,
     setCategory,
@@ -60,12 +62,12 @@ export const App = () => {
   //  Definição da URL base
   axios.defaults.baseURL = "http://localhost:80/back/";
 
-  const getProducts = async () => {
+  const getAssets = async () => {
     try {
       const res = await axios.get("?action=search");
       const data = res.data;
 
-      setProducts(data);
+      setAssets(data);
     } catch (error) {
       console.error(`Erro: ${error}`);
     }
@@ -82,63 +84,99 @@ export const App = () => {
       .then((res) => {
         console.log(res);
 
-        const filteredAssets = assets.filter((assets) => assets.id !== id);
+        const filteredAssets = assets.filter((asset) => asset.id !== id);
         setState(filteredAssets);
       })
       .catch((error) => console.error(error));
   };
 
-  const editAsset = () => {};
+  const editAsset = async (id, model, manufacturer, category, note, func) => {
+    await axios
+      .put(
+        `?action=update/:id`,
+        {
+          id: id,
+          model: model.trim(),
+          manufacturer: manufacturer.trim(),
+          category: category.trim(),
+          note: note.trim(),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));
+
+    setModalOpened(false);
+
+    func();
+  };
 
   return (
     <div className={styles.container}>
-      <Menu />
+      <Menu setAction={setAction} />
 
       <div className={styles.mainContainer}>
         <div className={styles.actions}>
           <button
-            value={"products"}
+            value={"assets"}
             onClick={(e) => {
               changeAction(e.target.value);
-              getProducts();
+              getAssets();
             }}
           >
-            Tabela de produtos
+            Tabela de ativos
           </button>
           <button
             value={"register"}
             onClick={(e) => changeAction(e.target.value)}
           >
-            Novo produto
+            Novo ativo
           </button>
           <button
             value={"search"}
             onClick={(e) => changeAction(e.target.value)}
           >
-            Buscar produto
+            Buscar ativo
           </button>
         </div>
 
         <div className={styles.form}>
           {action === "" && <h1>Bem vindo!</h1>}
-          {action === "products" && (
-            <Products
-              products={products}
+          {action === "assets" && (
+            <Assets
+              assets={assets}
               deleteAsset={deleteAsset}
-              getProducts={getProducts}
-              setProducts={setProducts}
+              getAssets={getAssets}
+              setAssets={setAssets}
+              setSelectedAsset={setSelectedAsset}
               modal={modal}
+              categorys={categorys}
+              selectedAsset={selectedAsset}
+              editAsset={editAsset}
+              action={action}
             />
           )}
           {action === "register" && (
-            <NewProduct
+            <NewAsset
               categorys={categorys}
-              product={productData}
-              productFunctions={productFunctions}
+              asset={assetData}
+              assetFunctions={assetFunctions}
             />
           )}
           {action === "search" && (
-            <Search categorys={categorys} deleteAsset={deleteAsset} modal={modal} />
+            <Search
+              categorys={categorys}
+              deleteAsset={deleteAsset}
+              modal={modal}
+              setSelectedAsset={setSelectedAsset}
+              selectedAsset={selectedAsset}
+              editAsset={editAsset}
+              action={action}
+            />
           )}
         </div>
       </div>

@@ -2,17 +2,24 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { EditModal } from "../EditModal";
+import { Asset } from "../Asset";
 
-export const Search = ({ categorys, deleteAsset, modal }) => {
+export const Search = ({
+  categorys,
+  deleteAsset,
+  modal,
+  setSelectedAsset,
+  selectedAsset,
+  editAsset,
+  action,
+}) => {
   const [model, setModel] = useState("");
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("");
 
   const [assets, setAssets] = useState([]);
 
-  const getProduct = async (e, filter, asset) => {
-    e.preventDefault();
-
+  const getAsset = async (filter, asset) => {
     const res = await axios.get(`?action=search&${filter}=${asset}`);
     const data = res.data;
 
@@ -21,9 +28,7 @@ export const Search = ({ categorys, deleteAsset, modal }) => {
 
   return (
     <div className={styles.container}>
-      {modal.modalOpened && <EditModal modal={modal} />}
-
-      <h1>Buscar produto</h1>
+      <h1>Buscar ativo</h1>
 
       <div className={styles.search}>
         <div className={styles.filter}>
@@ -44,9 +49,11 @@ export const Search = ({ categorys, deleteAsset, modal }) => {
 
         <form
           className={styles.searchForm}
-          onSubmit={(e) =>
-            getProduct(e, filter, filter === "model" ? model : category)
-          }
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            getAsset(filter, filter === "model" ? model : category);
+          }}
         >
           {filter === "model" && (
             <div>
@@ -88,38 +95,62 @@ export const Search = ({ categorys, deleteAsset, modal }) => {
 
       {assets.length > 0 ? (
         <div className={styles.assetsContainer}>
-          {assets.map((asset) => (
-            <table key={asset.id}>
-              <tbody>
-                <tr>
-                  <td>{asset.model}</td>
-                  <td>{asset.manufacturer}</td>
-                  <td>{asset.category}</td>
-                  <td>{asset.note}</td>
-                  <td>
-                    <button
-                      className={styles.edit}
-                      onClick={() => {
-                        modal.setModalOpened(!modal.modalOpened);
-                      }}
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </button>
-                    <button
-                      className={styles.delete}
-                      onClick={() => deleteAsset(asset.id, assets, setAssets)}
-                    >
-                      <i className="bi bi-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          {assets.map(({ id, model, manufacturer, category, note }) => (
+            <div key={id}>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>{model}</td>
+                    <td>{manufacturer}</td>
+                    <td>{category}</td>
+                    <td>{note}</td>
+                    <td>
+                      <button
+                        className={styles.edit}
+                        onClick={() => {
+                          modal.setModalOpened(!modal.modalOpened);
+                          setSelectedAsset({
+                            id,
+                            model,
+                            manufacturer,
+                            category,
+                            note,
+                          });
+                        }}
+                      >
+                        <i className="bi bi-pencil-square"></i>
+                      </button>
+                      <button
+                        className={styles.delete}
+                        onClick={() => deleteAsset(id, assets, setAssets)}
+                      >
+                        <i className="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              {modal.modalOpened && (
+                <EditModal
+                  key={id}
+                  modal={modal}
+                  categorys={categorys}
+                  selectedAsset={selectedAsset}
+                  editAsset={editAsset}
+                  getAsset={getAsset}
+                  action={action}
+                  filter={filter}
+                  modelData={model}
+                  categoryData={category}
+                />
+              )}
+            </div>
           ))}
         </div>
       ) : (
         <div>
-          <h3>Nenhum produto pesquisado</h3>
+          <h3>Nenhum ativo pesquisado</h3>
         </div>
       )}
     </div>

@@ -1,0 +1,74 @@
+.divForm label {
+  display: block;
+  margin-bottom: 0.25rem;
+  margin-top: 1rem;
+}
+
+.divForm input {
+  width: 300px;
+  border-radius: 5px;
+  border: 2px solid #199;
+  padding: 0.5rem;
+}
+
+.divForm select {
+  border: 2px solid #199;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.divForm textarea {
+  resize: none;
+  width: 400px;
+  height: 100px;
+  padding: 0.5rem;
+  border: 2px solid #199;
+  border-radius: 5px;
+}
+
+.btn {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+  font-weight: bold;
+  background-color: #080;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: all 0.2s;
+}
+.btn:hover {
+  opacity: 1;
+}
+
+.notRegistered {
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.registered {
+  margin-left: 1rem;
+  background-color: #080;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: #fff;
+  transition: all 0.2s;
+  transform: scale(1);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+small {
+  font-style: italic;
+}
+
+.alert {
+  color: #f00;
+  margin-top: 0.25rem;
+}

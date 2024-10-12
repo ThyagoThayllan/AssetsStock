@@ -14,21 +14,21 @@
     line-height: 1;
 }
 
-.container ul {
+.container nav {
     display: flex;
     flex-flow: column;
     gap: 0.5rem;
 }
 
-.container nav ul li {
-    list-style: none;
-}
-.container nav ul li a {
-    text-decoration: none;
+.container button {
+    background-color: transparent;
+    border: 0;
+    text-align: start;
     color: #fff;
-    border-radius: 5px;
-    opacity: 0.9;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
 }
-.container nav ul li a:hover {
-    opacity: 1;
+.container button:hover {
+    background-color: rgb(20, 201, 201);
 }

@@ -23,7 +23,7 @@ Software intuitivo, fácil de usar e prático.
 
 # Requisitos
 
-- Node.js - Para instalação dos pacotes.
+- Node.js e NPM - Para instalação dos pacotes.
 - XAMPP (ou algum outro servidor local) - Para rodar a API que é em PHP.
 
 # Rodar projeto localmente
@@ -31,6 +31,7 @@ Software intuitivo, fácil de usar e prático.
 ## Instalação de pacotes
 
 Após o download do projeto, você precisará instalar os pacotes necessários para rodá-lo.<br>
+Na pasta **AssetsStock** `C:\dev\AssetsStock`, utilize o seguinte comando:
 
 ```
 npm install
@@ -38,7 +39,7 @@ npm install
 
 ## Rodar o front
 
-Utilize o seguinte comando para rodar a aplicação React:<br>
+Em **AssetsStock** `C:\dev\AssetsStock`, utilize o seguinte comando para rodar a aplicação React:<br>
 
 ```
 npm run dev
@@ -53,7 +54,12 @@ Exemplo:
 C:\xampp\htdocs\back
 ```
 
-**Nota:** É necessário que mova a pasta **_back_** para a pasta **_htdocs_** do **XAMPP**, pois é assim que irá rodar a API em PHP. Caso tenha outro servidor local para rodar PHP, você pode estar utilizando.
+Ligue o servidor e verifique se está rodando na porta 80 (porta padrão).
+![](./imgs/xamp.png)
+
+**Nota¹:** O servidor deve está rodando na porta 80, pois é lá que está sendo feita a requisição HTTP **_(http://localhost:80/back/)_**.
+
+**Nota²:** É necessário que mova a pasta **_back_** para a pasta **_htdocs_** do **XAMPP**, pois é assim que irá rodar a API em PHP. Caso tenha outro servidor local para rodar PHP, você pode estar utilizando.
 
 # Instruções
 

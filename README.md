@@ -46,7 +46,7 @@ npm run dev
 
 ## Rodar o back
 
-Utilizando o **XAMP**, mova a pasta **_back_** para a pasta **_htdocs_**, deixando ela desta maneira:<br>
+Utilizando o **XAMP**, mova a pasta **_back_** para a pasta **_htdocs_**.<br>
 Exemplo:
 
 ```

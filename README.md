@@ -23,3 +23,12 @@ Software intuitivo, fácil de usar e prático.
 
 - Node.js - Para instalação dos pacotes.
 - XAMPP (ou algum outro servidor local) - Para rodar a API que é em PHP.
+
+# Rodar projeto localmente
+
+##  Instalação
+
+Após o download do projeto, você precisará instalar os pacotes necessários para rodá-lo.<br>
+```
+npm install
+```

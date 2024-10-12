@@ -15,7 +15,7 @@ export const Assets = ({
 }) => {
   return (
     <div className={styles.container}>
-      <h1>Tabela de Ativos</h1>
+      <h1>Tabela de ativos</h1>
 
       <table>
         <caption>Tabela de Ativos</caption>

@@ -7,22 +7,17 @@ import { Search } from "./components/Search";
 import styles from "./styles.module.css";
 
 export const App = () => {
-  const [selectedAsset, setSelectedAsset] = useState(null);
-
-  const [modalOpened, setModalOpened] = useState(false);
-  const modal = {
-    modalOpened,
-    setModalOpened,
-  };
-
   const [action, setAction] = useState("");
 
   const [model, setModel] = useState("");
   const [manufacturer, setManufacturer] = useState("");
   const [category, setCategory] = useState("");
   const [note, setNote] = useState("");
-
   const [assets, setAssets] = useState([]);
+
+  const [selectedAsset, setSelectedAsset] = useState(null);
+
+  const [modalOpened, setModalOpened] = useState(false);
 
   const assetData = {
     model,
@@ -35,6 +30,11 @@ export const App = () => {
     setManufacturer,
     setCategory,
     setNote,
+  };
+
+  const modal = {
+    modalOpened,
+    setModalOpened,
   };
 
   const categorys = [
@@ -74,45 +74,38 @@ export const App = () => {
   };
 
   const deleteAsset = async (id, assets, setState) => {
-    await axios
-      .delete(`?action=delete/:id`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: { id },
-      })
-      .then((res) => {
-        console.log(res);
+    await axios.delete("?action=delete/:id", {
+      id
+    }, {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((res) => {
+      console.log(res);
 
-        const filteredAssets = assets.filter((asset) => asset.id !== id);
-        setState(filteredAssets);
-      })
-      .catch((error) => console.error(error));
+      const filteredAssets = assets.filter((asset) => asset.id !== id);
+      setState(filteredAssets);
+    })
+    .catch((error) => console.error(error));
   };
 
   const editAsset = async (id, model, manufacturer, category, note, func) => {
-    await axios
-      .put(
-        `?action=update/:id`,
-        {
-          id: id,
-          model: model.trim(),
-          manufacturer: manufacturer.trim(),
-          category: category.trim(),
-          note: note.trim(),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((res) => console.log(res))
-      .catch((error) => console.error(error));
+    await axios.put("?action=update/:id", {
+      id,
+      model: model.trim(),
+      manufacturer: manufacturer.trim(),
+      category: category.trim(),
+      note: note.trim(),
+    }, {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((res) => {
+      console.log(res);
 
-    setModalOpened(false);
+      setModalOpened(false);
 
-    func();
+      func();
+    })
+    .catch((error) => console.error(error));
   };
 
   return (

@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { EditModal } from "../EditModal";
-import { Asset } from "../Asset";
 
 export const Search = ({
   categorys,
@@ -20,10 +19,14 @@ export const Search = ({
   const [assets, setAssets] = useState([]);
 
   const getAsset = async (filter, asset) => {
-    const res = await axios.get(`?action=search&${filter}=${asset}`);
-    const data = res.data;
+    try {
+      const res = await axios.get(`?action=search&${filter}=${asset}`);
+      const data = res.data;
 
-    setAssets(data);
+      setAssets(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

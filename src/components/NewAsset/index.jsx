@@ -17,37 +17,28 @@ export const NewAsset = ({ categorys, asset, assetFunctions }) => {
     ) {
       setEmpty(true);
     } else {
-      try {
-        setEmpty(false);
+      setEmpty(false);
 
-        await axios
-          .post(
-            "?action=register",
-            {
-              model: asset.model.trim(),
-              manufacturer: asset.manufacturer.trim(),
-              category: asset.category.trim(),
-              note: asset.note.trim(),
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
-          .then((res) => console.log(res))
-          .catch((error) => console.error(error));
+      await axios.post("?action=register", {
+        model: asset.model.trim(),
+        manufacturer: asset.manufacturer.trim(),
+        category: asset.category.trim(),
+        note: asset.note.trim(),
+      }, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        console.log(res);
 
         setRegistered(true);
 
         clearFormFields();
-
+          
         setTimeout(() => {
           setRegistered(false);
         }, 2000);
-      } catch (error) {
-        console.error(`Erro: ${error}`);
-      }
+      })
+      .catch((error) => console.error(error));
     }
   };
 

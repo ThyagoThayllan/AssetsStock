@@ -54,8 +54,7 @@ export const EditModal = ({
       note,
       action === "assets"
         ? getAssets
-        : () =>
-            getAsset(filter, filter === "model" ? modelData : categoryData)
+        : () => getAsset(filter, filter === "model" ? modelData : categoryData)
     );
   };
 
@@ -67,7 +66,6 @@ export const EditModal = ({
         <form
           onSubmit={(e) => {
             e.preventDefault();
-
             edit();
           }}
         >

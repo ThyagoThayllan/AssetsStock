@@ -21,109 +21,133 @@ try {
 
         if ($action === 'search') {
             if (isset($_REQUEST['model'])) {
-                $model = formatData($_REQUEST['model']);
+                try {
+                    $model = formatData($_REQUEST['model']);
 
-                $sql = "SELECT * FROM assets WHERE model LIKE :model";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([
-                    ':model' => "%$model%"
-                ]);
+                    $sql = "SELECT * FROM assets WHERE model LIKE :model";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([
+                        ':model' => "%$model%"
+                    ]);
 
-                header('Content-Type: application/json');
+                    header('Content-Type: application/json');
 
-                $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                die(json_encode($response));
+                    $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    die(json_encode($response));
+                } catch (PDOException $e) {
+                    echo "Erro: " . $e->getMessage();
+                }
             }
 
             if (isset($_REQUEST['category'])) {
-                $category = formatData($_REQUEST['category']);
+                try {
+                    $category = formatData($_REQUEST['category']);
 
-                $sql = "SELECT * FROM assets WHERE category LIKE :category";
+                    $sql = "SELECT * FROM assets WHERE category LIKE :category";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([
+                        ':category' => "%$category%"
+                    ]);
+
+                    header('Content-Type: application/json');
+
+                    $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    die(json_encode($response));
+                } catch (PDOException $e) {
+                    echo "Erro: " . $e->getMessage();
+                }
+            }
+
+            try {
+                $sql = "SELECT * FROM assets";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([
-                    ':category' => "%$category%"
-                ]);
+                $stmt->execute();
 
                 header('Content-Type: application/json');
 
                 $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 die(json_encode($response));
+            } catch (PDOException $e) {
+                echo "Erro: " . $e->getMessage();
             }
-
-            $sql = "SELECT * FROM assets";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-
-            header('Content-Type: application/json');
-
-            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            die(json_encode($response));
         }
 
         if ($action === 'register') {
-            $json = file_get_contents('php://input'); //    Ler a requisição em JSON
-            $data = json_decode($json, true);   //  Transforma o JSON em um Array Associativo
-            
-            $model = formatData($data['model']);
-            $manufacturer = formatData($data['manufacturer']);
-            $category = formatData($data['category']);
-            $note = formatData($data['note']);
+            try {
+                $json = file_get_contents('php://input'); //    Ler a requisição em JSON
+                $data = json_decode($json, true);   //  Transforma o JSON em um Array Associativo
 
-            $sql = "INSERT INTO assets(model, manufacturer, category, note) VALUES(:model, :manufacturer, :category, :note)";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([
-                ':model' => $model,
-                ':manufacturer' => $manufacturer,
-                ':category' => $category,
-                ':note' => $note
-            ]);
+                $model = formatData($data['model']);
+                $manufacturer = formatData($data['manufacturer']);
+                $category = formatData($data['category']);
+                $note = formatData($data['note']);
 
-            die(json_encode([
-                'model' => $model,
-                'manufacturer' => $manufacturer,
-                'category' => $category,
-                'note' => $note
-            ]));
+                $sql = "INSERT INTO assets(model, manufacturer, category, note) VALUES(:model, :manufacturer, :category, :note)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    ':model' => $model,
+                    ':manufacturer' => $manufacturer,
+                    ':category' => $category,
+                    ':note' => $note
+                ]);
+
+                die(json_encode([
+                    'model' => $model,
+                    'manufacturer' => $manufacturer,
+                    'category' => $category,
+                    'note' => $note
+                ]));
+            } catch (PDOException $e) {
+                echo "Erro: " . $e->getMessage();
+            }
         }
 
         if ($action === 'update/:id') {
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
-            
-            $id = formatData($data['id']);
-            $model = formatData($data['model']);
-            $manufacturer = formatData($data['manufacturer']);
-            $category = formatData($data['category']);
-            $note = formatData($data['note']);
+            try {
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
 
-            $sql = "UPDATE assets SET model = :model, manufacturer = :manufacturer, category = :category, note = :note WHERE id = :id";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([
-                ':id' => $id,
-                ':model' => $model,
-                ':manufacturer' => $manufacturer,
-                ':category' => $category,
-                ':note' => $note
-            ]);
+                $id = formatData($data['id']);
+                $model = formatData($data['model']);
+                $manufacturer = formatData($data['manufacturer']);
+                $category = formatData($data['category']);
+                $note = formatData($data['note']);
 
-            die(json_encode(['success' => true]));
+                $sql = "UPDATE assets SET model = :model, manufacturer = :manufacturer, category = :category, note = :note WHERE id = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    ':id' => $id,
+                    ':model' => $model,
+                    ':manufacturer' => $manufacturer,
+                    ':category' => $category,
+                    ':note' => $note
+                ]);
+
+                die(json_encode(['success' => true]));
+            } catch (PDOException $e) {
+                echo "Erro: " . $e->getMessage();
+            }
         }
 
         if ($action === 'delete/:id') {
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
-            
-            $id = $data['id'];
-            
-            $sql = "DELETE FROM assets WHERE id = :id";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([
-                ':id' => $id,
-            ]);
+            try {
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
 
-            die(json_encode(['success' => true]));
+                $id = $data['id'];
+
+                $sql = "DELETE FROM assets WHERE id = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    ':id' => $id,
+                ]);
+
+                die(json_encode(['success' => true]));
+            } catch (PDOException $e) {
+                echo "Erro: " . $e->getMessage();
+            }
         }
     }
-} catch (PDOException $error) {
-    echo "Erro: " . $error->getMessage();
+} catch (PDOException $e) {
+    echo "Erro de conexão: " . $e->getMessage();
 }

@@ -75,8 +75,7 @@ export const App = () => {
 
   const deleteAsset = async (id, assets, setState) => {
     await axios.delete("?action=delete/:id", {
-      id
-    }, {
+      data: { id },
       headers: { "Content-Type": "application/json" },
     })
     .then((res) => {

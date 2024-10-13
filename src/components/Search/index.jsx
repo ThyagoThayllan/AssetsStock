@@ -23,6 +23,8 @@ export const Search = ({
       const res = await axios.get(`?action=search&${filter}=${asset}`);
       const data = res.data;
 
+      console.log(data);
+
       setAssets(data);
     } catch (error) {
       console.error(error);

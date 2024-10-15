@@ -98,7 +98,6 @@
 .assetsContainer {
   display: flex;
   flex-flow: column;
-  font-weight: bold;
   gap: 1rem;
 }
 
